@@ -8,10 +8,10 @@ main.o: main.cpp
 	@echo "Compilando..."
 	g++ -c main.cpp
 
-CasaTabuleiro.o: CasaTabuleiro.cpp CasaTabuleiro.h
+CasaTabuleiro.o: CasaTabuleiro.cpp ../include/CasaTabuleiro.h
 	g++ -c CasaTabuleiro.cpp
 
-JogoDoPulo.o: JogoDoPulo.cpp JogoDoPulo.h
+JogoDoPulo.o: JogoDoPulo.cpp ../include/JogoDoPulo.h
 	g++ -c JogoDoPulo.cpp
 
 run: tp1

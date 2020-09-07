@@ -1,4 +1,4 @@
-#include "CasaTabuleiro.h"
+#include "../include/CasaTabuleiro.h"
 
 #include <iostream>
 
@@ -9,11 +9,14 @@ CasaTabuleiro::CasaTabuleiro(int x, int y, int numPulos, bool casaFinal, \
     this->numPulos = numPulos;
     this->casaFinal = casaFinal;
     this->jogadorPresente = jogadorPresente;
+    this->ligadaAFinal = false;
 }
 
 void CasaTabuleiro::adicionaLigacao(CasaTabuleiro* casa){
     // adiciona ligacao com outras casas
     casasLigadas.push_back(casa);
 
-    //std::cout << "(" << x << "," <<  y << ")" << "->" << "(" << casa->x << "," << casa->y << ")" << std::endl;
+    if(casa->casaFinal == true){
+        this->ligadaAFinal = true;
+    }
 }

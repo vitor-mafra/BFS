@@ -10,8 +10,8 @@
 #include <vector>
 #include <map>
 
-#include "JogoDoPulo.h"
-#include "CasaTabuleiro.h"
+#include "../include/JogoDoPulo.h"
+#include "../include/CasaTabuleiro.h"
 
 int main(int argc,  char** argv){
 
@@ -32,7 +32,6 @@ int main(int argc,  char** argv){
     numJogadores = stoi(linha);
 
     // montando o tabuleiro
-    int tabuleiroMatriz[tamLinhas][tamColunas];
     bool casaFinal = false;
 
     JogoDoPulo *tabuleiro = new JogoDoPulo();
@@ -42,20 +41,19 @@ int main(int argc,  char** argv){
     for (int i = 0; i < tamLinhas; i++){
         std::getline(input, linha);
         for(int j = 0; j < tamColunas; j++){
-            // para cada linha do arquivo - ou seja, linha da matriz - consome
-            // seu primeiro elemento e o atribui ao prox elemnto da matriz
-            tabuleiroMatriz[i][j] = stoi(linha.substr(0, linha.find(" ")));
-
+            // verifica se eh a casa final
             if (i == (tamLinhas - 1) && j == (tamColunas - 1)){
                 casaFinal = true;
             }
-
-            tabuleiro->adicionaCasa(i, j, tabuleiroMatriz[i][j], casaFinal, '\0');
+        // sei que em Python o metodo split() faz esse trabalho de forma muito
+        // robusta. Nao consegui encontar facilmente algo | parecido em C++
+        //                                                |
+        //                                                v
+            tabuleiro->adicionaCasa(i, j, stoi(linha.substr(0, linha.find(" "))), casaFinal, '\0');
             // atualiza a linha para que o primeiro elemento seja sempre o prox
             linha = linha.substr(linha.find(" ") + 1, linha.length());
         }
-        // sei que em Python o metodo split() faz esse trabalho de forma muito
-        // robusta. Nao consegui encontar facilmente algo parecido em C++
+
     }
 
     // pegando a posicao inicial de cada jogador
@@ -83,7 +81,6 @@ int main(int argc,  char** argv){
         }
 
     }
-
 
     // faz as ligacoes do grafo passando os limites do tabuleiro
     tabuleiro->montaTabuleiro((tamLinhas - 1), (tamColunas - 1));
